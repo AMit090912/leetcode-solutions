@@ -1,0 +1,29 @@
+class Solution {
+public:
+    void cs(vector<int>& arr,int i, vector<int> & combi, vector<vector<int>> & ans, int target){
+        
+        if(i == arr.size() || target < 0){
+            return;
+        }
+
+        if(target == 0){
+                ans.push_back(combi);
+            return;
+        }
+
+        combi.push_back(arr[i]);
+        cs(arr, i , combi, ans, target- arr[i]);
+        combi.pop_back();
+        cs(arr, i +1, combi, ans, target );
+
+
+    }
+    vector<vector<int>> combinationSum(vector<int>& arr, int target) {
+        vector<int> combi;
+        vector<vector<int>> ans;
+
+        sort(arr.begin(), arr.end());
+        cs(arr,0,combi, ans, target);
+        return ans;
+    }
+};
